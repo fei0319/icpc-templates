@@ -1,0 +1,90 @@
+\documentclass[12pt]{ctexart}
+
+\title{ICPC Templates}
+\date{\today}
+\author{Fei Pan}
+\newcommand{\version}{v0.1}
+
+\usepackage{amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{fontspec}
+
+\setmonofont{Consolas}
+
+\lstdefinestyle{cppstyle}{
+    language=C++,
+    backgroundcolor=\color{white},   % 选择背景色
+    commentstyle=\color{green},      % 注释的颜色
+    keywordstyle=\color{magenta},    % 关键词的颜色
+    stringstyle=\color{red},         % 字符串的颜色
+    basicstyle=\ttfamily\small,      % 基本字体
+    breaklines=true,                  % 自动换行
+    numbers=left,                     % 行号位置
+    numberstyle=\tiny\color{gray},    % 行号的样式
+    stepnumber=1,                    % 行号递增
+    numbersep=5pt,                   % 行号和代码间距
+    tabsize=4,                       % tab 宽度
+    showspaces=false,                % 不显示空格
+    showstringspaces=false,          % 不显示字符串中的空格
+    showtabs=false,                  % 不显示制表符
+    frame=single,
+    emph={constexpr, nullptr, class, vector, pair, set, map, unordered_map},     % 自定义强调
+    emphstyle=\color{magenta},         % 自定义强调样式
+}
+\lstset{style=cppstyle}
+
+\geometry{a4paper}
+\geometry{top=2cm} 
+\geometry{bottom=1cm}
+\geometry{left=1.5cm}
+\geometry{right=1.5cm}
+
+\setstretch{0.75}
+
+\begin{document}
+\maketitle
+\begin{center}
+    \textit{版本: }\version
+\end{center}
+
+\tableofcontents
+\newpage
+
+\section{说明}
+
+定义执行一次以下代码花费的时间为一个标准时间。其在各个 OJ 上的具体值为：
+
+\begin{itemize}
+\item Codeforces: 202ms
+\item AtCoder: 221ms
+\item LibraryChecker: 176ms
+\end{itemize}
+\begin{lstlisting}
+constexpr int N = 1e6;
+std::set<int> s;
+for (int i = 0; i < N; ++i) {
+    s.insert(i);
+}
+\end{lstlisting}
+\newpage
+
+\section{计数}
+\include{doc/modint}
+\include{doc/poly}
+
+\section{图论}
+\include{doc/flow}
+\include{doc/bipartite_coloring}
+
+\section{数据结构}
+\include{doc/link_cut_tree}
+
+\section{技巧}
+\include{doc/monoid_product}
+
+\end{document}
