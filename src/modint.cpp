@@ -1,6 +1,5 @@
 template <int m>
-struct ModInt {
-private:
+class ModInt {
     int raw_;
     using mint = ModInt;
     using i64 = int64_t;
@@ -25,8 +24,7 @@ public:
         return *this;
     }
     mint &operator/=(const mint &rhs) {
-        raw_ = (i64)raw_ * qpow(rhs.raw_, m - 2) % m;
-        return *this;
+        return *this *= qpow(rhs, m - 2);
     }
 
     friend mint operator+(const mint &lhs, const mint &rhs) {
