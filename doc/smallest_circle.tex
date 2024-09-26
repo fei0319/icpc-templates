@@ -1,0 +1,17 @@
+\subsection{最小圆覆盖}
+
+\subsubsection{用法}
+
+通过 \lstinline{SmallestCircle<real>} 实例化最小圆覆盖类，其中 \lstinline{real} 为一个浮点数类。通过 \lstinline{build} 指定一系列二维点，通过重载的函数调用运算符获取一个由圆心和半径组成的 \lstinline{std::pair}。修改成员 \lstinline{EPS} 以设置精度。
+
+\subsubsection{注意}
+
+提供给 \lstinline{build} 的二维点集应已被可靠地打乱顺序，以保证复杂度。
+
+\subsubsection{性能}
+
+时间复杂度为 $O(n)$。$n = 10^5$ 约花费 0.19 个标准时间。
+
+\subsubsection{代码}
+
+\lstinputlisting{src/smallest_circle.cpp}

@@ -1,5 +1,8 @@
+.vscode/
+.cph/
 *.aux
 *.log
 *.pdf
 *.toc
 *.gz
+*.exe
