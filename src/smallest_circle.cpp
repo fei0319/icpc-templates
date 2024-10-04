@@ -33,7 +33,7 @@ class SmallestCircle {
     }
 
 public:
-    using pnt_t = Point;
+    using point_t = Point;
     T EPS{1e-8};
     void build(const std::vector<Point> &p) {
         o = p[0];
