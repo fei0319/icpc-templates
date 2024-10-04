@@ -1,19 +1,19 @@
-template <typename real>
+template <typename T>
 class SmallestCircle {
     struct Point {
-        real x{0}, y{0};
+        T x{0}, y{0};
     };
     Point o{};
-    real sqr_r{};
+    T sqr_r{};
 
-    real sqr(const real &x) {
+    T sqr(const T &x) {
         return x * x;
     }
-    real sqrdis(const Point &a, const Point &b) {
+    T sqrdis(const Point &a, const Point &b) {
         return sqr(a.x - b.x) + sqr(a.y - b.y);
     }
     Point geto(const Point &a, const Point &b, const Point &c) {
-        real a1, a2, b1, b2, c1, c2;
+        T a1, a2, b1, b2, c1, c2;
         Point ans;
         a1 = 2 * (b.x - a.x), b1 = 2 * (b.y - a.y);
         c1 = sqr(b.x) - sqr(a.x) + sqr(b.y) - sqr(a.y);
@@ -34,7 +34,7 @@ class SmallestCircle {
 
 public:
     using pnt_t = Point;
-    real EPS{1e-8};
+    T EPS{1e-8};
     void build(const std::vector<Point> &p) {
         o = p[0];
         sqr_r = 0;
@@ -62,7 +62,7 @@ public:
             }
         }
     }
-    std::pair<Point, real> operator()() const {
-        return std::make_pair(o, (real)sqrtl(sqr_r));
+    std::pair<Point, T> operator()() const {
+        return std::make_pair(o, (T)sqrtl(sqr_r));
     }
 };
