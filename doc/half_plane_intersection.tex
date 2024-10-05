@@ -1,0 +1,29 @@
+\subsection{半平面交}
+
+求解一系列半平面的交。
+
+\subsubsection{用法}
+
+通过 \lstinline{HalfPlaneIntersection<T>} 实例化半平面交类。通过函数调用运算符向实例传入包含一系列半平面的 \lstinline{std::vector<Line>}，返回半平面交顶点集。
+
+半平面的声明如下：
+
+\begin{lstlisting}
+struct Line {
+    T a, b, c;
+};
+\end{lstlisting}
+
+其表示一个方程为 $Ax + By + C \ge 0$ 的半平面。
+
+\subsubsection{注意}
+
+该实现的正确性依赖于外方框的存在。请确保传入的半平面中包含外方框。
+
+\subsubsection{性能}
+
+时间复杂度为 $O(n \log n)$。
+
+\subsubsection{代码}
+
+\lstinputlisting{src/half_plane_intersection.cpp}
