@@ -1,5 +1,3 @@
-#include <bits/stdc++.h>
-
 template <typename T>
 class HalfPlaneIntersection {
     struct Point {
@@ -35,13 +33,12 @@ public:
     using point_t = Point;
     std::vector<Point> operator()(std::vector<Line> lines) {
         std::sort(lines.begin(), lines.end(), [](const Line &u, const Line &v) {
-            return atan2(u.b, -u.a) < atan2(v.b, -v.a);
+            return atan2(u.b, -u.a) > atan2(v.b, -v.a);
         });
         {
             int j = -1;
             for (int i = 0; i < lines.size(); ++i) {
-                if (j != -1 && lines[j].dir() * lines[i].dir() == 0 &&
-                    lines[j].a * lines[i].a + lines[j].b * lines[i].b > 0) {
+                if (j != -1 && lines[j].dir() * lines[i].dir() == 0) {
                     if (lines[j].contains(lines[i])) {
                         lines[j] = lines[i];
                     }
@@ -75,50 +72,3 @@ public:
         return std::vector<Point>{c.begin() + l, c.begin() + r + 1};
     }
 };
-
-using real = long double;
-using hpi = HalfPlaneIntersection<real>;
-using Line = hpi::line_t;
-using Point = hpi::point_t;
-
-int main() {
-    int n;
-    std::cin >> n;
-
-    std::vector<Line> lines;
-    for (int i = 0; i < n; ++i) {
-        int m;
-        std::cin >> m;
-
-        std::vector<Point> b(m);
-        for (int j = 0; j < m; ++j) {
-            int x, y;
-            std::cin >> x >> y;
-            b[j].x = x;
-            b[j].y = y;
-        }
-
-        for (int j = 0; j < m; ++j) {
-            auto [x1, y1] = b[j];
-            auto [x2, y2] = b[(j + 1) % m];
-            real a = y1 - y2, b = x2 - x1, c = -(a * x1 + b * y1);
-            lines.push_back(Line{a, b, c});
-        }
-    }
-    lines.push_back(Line{0, 1, 1e3});
-    lines.push_back(Line{0, -1, 1e3});
-    lines.push_back(Line{1, 0, 1e3});
-    lines.push_back(Line{-1, 0, 1e3});
-
-    auto points = hpi()(lines);
-    real ans = 0;
-
-    std::cout << std::fixed << std::setprecision(3);
-    for (int i = 0; i < points.size(); ++i) {
-        auto [x1, y1] = points[i];
-        auto [x2, y2] = points[(i + 1) % points.size()];
-        ans += x1 * y2 - x2 * y1;
-    }
-
-    std::cout << fabsl(ans) / 2 << '\n';
-}
