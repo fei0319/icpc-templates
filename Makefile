@@ -1,6 +1,6 @@
 TARGET = index.pdf
 SOURCE = index.tex
-INTERMEDIATE_FILES = **.aux **.swp **.log **.toc .*.swp
+INTERMEDIATE_FILES = */*.aux *.aux *.swp *.log *.toc .*.swp
 LATEX = xelatex
 
 all: $(TARGET)
