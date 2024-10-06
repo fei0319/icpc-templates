@@ -1,5 +1,52 @@
 \subsection{多项式}
 
+高效实现的多项式类，提供一切多项式支持。
+
+\subsubsection{用法}
+
+通过一个 \lstinline{ModInt} 的实例类来实例化 \lstinline{Poly}。对应的模数需为适合的 NTT 模数，例如：
+
+\begin{itemize}
+\item $167772161 = 5 \times 2^{25} + 1$
+\item $469762049 = 7 \times 2^{26} + 1$
+\item $998244353 = 119 \times 2^{23} + 1$
+\item $1004535809 = 479 \times 2^{21} + 1$
+\end{itemize}
+
+该实现需要特别的原根，可以通过 \lstinline{primitive_root.cpp} 计算。对于 $998244353$ 可使用 $31$，对于 $1004535809$ 可使用 $702606812$。使用时，用适合的原根替换第 17 行的 \lstinline{31}。
+
+\lstinline{Poly} 继承了 \lstinline{std::vector}，因此支持一切 \lstinline{std::vector} 的功能。可能需要在 \lstinline{Poly} 的 public 区添加 \lstinline{using std::vector<Z>::method} 来导入相应方法。
+
+该实现以符合直觉的方式提供了以下功能：
+
+\begin{itemize}
+\item 线性运算：通过重载的运算符执行；支持并不完全。
+\item 卷积：通过重载的 \lstinline{*}、\lstinline{*=} 运算符执行。
+\item 求逆：通过 \lstinline{Poly Poly::inv() const} 执行。
+\item 对数：通过 \lstinline{Poly log(const Poly &)} 执行。
+\item 指数：通过 \lstinline{Poly exp(const Poly &)} 执行。
+\end{itemize}
+
+\subsubsection{注意}
+
+在 VS Code 环境下使用 \lstinline{Poly} 的正确代码会产生异常报错。
+
+\subsubsection{性能}
+
+\begin{tabular}{|c|c|c|}
+\hline
+操作 & 规模 & 用时/标准时间 \\
+\hline
+卷积 & $|F| + |G| \le 2^{20}$ & 1.35 \\
+\hline
+求逆 & $n \le 10^5$ & 0.40 \\
+\hline
+对数 & $n \le 10^5$ & 0.55 \\
+\hline
+指数 & $n \le 10^5$ & 1.22 \\
+\hline
+\end{tabular}
+
 \subsubsection{代码}
 
 \lstinputlisting{src/poly.cpp}
