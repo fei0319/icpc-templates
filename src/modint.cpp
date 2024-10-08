@@ -1,26 +1,32 @@
 template <int m>
 class ModInt {
-    int raw_;
+    int raw;
     using mint = ModInt;
     using i64 = int64_t;
 
 public:
-    ModInt() : raw_(0) {}
-    ModInt(const auto &v) : raw_(v % m) {}
+    ModInt() : raw(0) {}
+    ModInt(const auto &v) : raw(v % m) {}
     int value() const {
-        return (raw_ + m) % m;
+        return raw;
     }
 
     mint &operator+=(const mint &rhs) {
-        raw_ = (raw_ + rhs.raw_) % m;
+        raw += rhs.raw;
+        if (raw >= m) {
+            raw -= m;
+        }
         return *this;
     }
     mint &operator-=(const mint &rhs) {
-        raw_ = (raw_ - rhs.raw_) % m;
+        raw -= rhs.raw;
+        if (raw < 0) {
+            raw += m;
+        }
         return *this;
     }
     mint &operator*=(const mint &rhs) {
-        raw_ = (i64)raw_ * rhs.raw_ % m;
+        raw = (i64)raw * rhs.raw % m;
         return *this;
     }
     mint &operator/=(const mint &rhs) {
