@@ -1,0 +1,36 @@
+\subsection{Min-25 筛}
+
+以亚线性复杂度计算积性函数 $f$ 前缀和。仅要求 $f(p)$ 可以表示为低次多项式。
+
+\subsubsection{用法}
+
+通过 \lstinline{Min25<T, M, F>(a, f)} 构造一个 Min-25 筛对象。
+
+\begin{itemize}
+\item \lstinline{T}：结果类型。
+\item \lstinline{M}：多项式次数。
+\item \lstinline{F}：见 \lstinline{f}。
+\item \lstinline{a}：所求积性函数在质数处取值的多项式，类型为 \lstinline{std::array<T, M>}。
+\item \lstinline{f}：所求积性函数在 $p^k$ 处的取值，类型为 \lstinline{F}，接受两个 32 位有符号整数 $p, k$，返回一个 \lstinline{T} 类型的值 $f(p, k)$。
+\end{itemize}
+
+通过函数调用运算符传入一个 64 位有符号整数，返回所求积性函数的前缀和。
+
+需要实现一个 \lstinline{power_sum} 函数。其原型如下：
+
+\begin{lstlisting}
+template <typename T>
+T power_sum(i64 n, int k);
+\end{lstlisting}
+
+其会被调用 $O(m\sqrt{n})$ 次，应当返回 $\sum_{i = 1}^n i^k$。
+
+\subsubsection{注意}
+
+\subsubsection{性能}
+
+时间复杂度为 $O\left(\dfrac{n^{\frac{3}{4}}m}{\log n}\right)$。
+
+\subsubsection{代码}
+
+\lstinputlisting{src/min25.cpp}
