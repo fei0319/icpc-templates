@@ -8,7 +8,7 @@
 1. 逆矩阵
 1. 平面最近点对
 1. 二维凸包
-1. min25 筛
+1. ~~min25 筛~~
 1. BCC SCC
 1. Miller-Rabin 素性测试
 1. Pollard-Rho 算法
