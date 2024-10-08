@@ -6,7 +6,7 @@ class ModInt {
 
 public:
     ModInt() : raw(0) {}
-    ModInt(const auto &v) : raw(v % m) {}
+    ModInt(const auto &v) : raw((v % m + m) % m) {}
     int value() const {
         return raw;
     }
