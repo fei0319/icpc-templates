@@ -7,6 +7,7 @@ all: $(TARGET)
 
 $(TARGET): $(SOURCE)
 	$(LATEX) $(SOURCE)
+	$(LATEX) $(SOURCE)
 
 clean:
 	rm -f $(TARGET) $(INTERMEDIATE_FILES)
