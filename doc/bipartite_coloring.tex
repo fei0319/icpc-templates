@@ -1,4 +1,18 @@
-\subsection{二分图染色}
+\subsection{二分图边染色}
+
+求二分图的最小边染色。染色数为最大度数。
+
+\subsubsection{用法}
+
+通过 \lstinline{BipartiteColoring(n)} 实例化二分图边染色类，其中 $n$ 为二分图点总数。
+
+通过 \lstinline{add_edge(u, v)} 添加一条连接左半部第 $u$ 个点和右半部第 $v$ 个点的边。
+
+通过函数调用运算符获取最小染色数。在此之后，可以通过 \lstinline{color} 成员获取边的染色。边按添加顺序，从 $0$ 开始编号。
+
+\subsubsection{性能}
+
+时间复杂度为 $O(nm)$，常数很小。
 
 \subsubsection{代码}
 
