@@ -5,6 +5,7 @@
 *.pdf
 *.toc
 *.gz
-*.exe
 *.swp
 test*.cpp
+*.exe
+*.out
