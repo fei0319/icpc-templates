@@ -12,7 +12,7 @@ public:
             raw += m;
         }
     }
-    int value() const {
+    int operator()() const {
         return raw;
     }
 
