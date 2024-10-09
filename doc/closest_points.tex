@@ -1,0 +1,15 @@
+\subsection{平面最近点对}
+
+\subsubsection{用法}
+
+向 \lstinline{closest_points<T, P>} 传入一个 \lstinline{std::vector<P>} 表示点集，其大小应不小于 2。\lstinline{T} 为存储中间过程距离使用的类型（可以为整数类型），\lstinline{P} 为二维点类，拥有成员 \lstinline{x} 和 \lstinline{y}。
+
+返回一个 \lstinline{std::pair<int, int>} 表示最近点对的下标。下标从 0 开始编号。
+
+\subsubsection{性能}
+
+时间复杂度为 $O(n \log n)$。$n = 5 \times 10^5$ 时约花费 0.95 个标准时间。
+
+\subsubsection{代码}
+
+\lstinputlisting{src/closest_points.cpp}

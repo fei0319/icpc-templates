@@ -14,27 +14,27 @@
 \usepackage{setspace}
 \usepackage{fontspec}
 
-\setmonofont{Hack}
+% \setmonofont{Consolas}
 
 \lstdefinestyle{cppstyle}{
     language=C++,
-    backgroundcolor=\color{white},   % 选择背景色
-    commentstyle=\color{green},      % 注释的颜色
-    keywordstyle=\color{magenta},    % 关键词的颜色
-    stringstyle=\color{red},         % 字符串的颜色
-    basicstyle=\ttfamily\small,      % 基本字体
-    breaklines=true,                  % 自动换行
-    numbers=left,                     % 行号位置
-    numberstyle=\tiny\color{gray},    % 行号的样式
-    stepnumber=1,                    % 行号递增
-    numbersep=5pt,                   % 行号和代码间距
-    tabsize=4,                       % tab 宽度
-    showspaces=false,                % 不显示空格
-    showstringspaces=false,          % 不显示字符串中的空格
-    showtabs=false,                  % 不显示制表符
+    backgroundcolor=\color{white},
+    commentstyle=\color{green},
+    keywordstyle=\color{magenta},
+    stringstyle=\color{red},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    tabsize=4,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
     frame=single,
-    emph={constexpr, nullptr, class, vector, pair, set, map, unordered_map},     % 自定义强调
-    emphstyle=\color{magenta},         % 自定义强调样式
+    emph={constexpr, nullptr, class, vector, pair, set, map, unordered_map},
+    emphstyle=\color{magenta},
 }
 \lstset{style=cppstyle}
 
@@ -89,6 +89,7 @@ for (int i = 0; i < N; ++i) {
 \section{计算几何}
 \include{doc/smallest_circle}
 \include{doc/half_plane_intersection}
+\include{doc/closest_points}
 
 \section{数论}
 \include{doc/primitive_root}
