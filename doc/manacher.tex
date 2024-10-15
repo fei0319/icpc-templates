@@ -1,0 +1,19 @@
+\subsection{回文中心}
+
+\subsubsection{用法}
+
+传入一个 \lstinline{std::vector} 或 \lstinline{std::string} 表示 $s$。
+
+返回一个长度为 $2n + 1$ 的 \lstinline{std::vector<int>}，其第 $i$ 位表示以 $s$ 的扩展串的 $i$ 位为回文中心的极长回文串的含心回文半径。
+
+\subsubsection{注意}
+
+若 $0 \in s$，则需修改第 3 行和第 6 行。
+
+\subsubsection{性能}
+
+时间复杂度为 $O(n)$。
+
+\subsubsection{代码}
+
+\lstinputlisting{src/manacher.cpp}
