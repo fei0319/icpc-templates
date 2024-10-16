@@ -5,7 +5,7 @@ struct SuffixAutomaton {
     int tot;
     explicit SuffixAutomaton(int size)
         : len(size), link(size), next(size), tot(1) {}
-    int extend(int p, char c) {
+    int extend(int p, int c) {
         int cur = ++tot;
         len[cur] = len[p] + 1;
         for (; p && !next[p][c]; p = link[p])
