@@ -10,17 +10,17 @@
 1. 二维凸包
 1. ~~min25 筛~~
 1. BCC SCC
-1. Miller-Rabin 素性测试
+1. ~~Miller-Rabin 素性测试~~
 1. Pollard-Rho 算法
 1. Z 函数
 1. AC 自动机
-1. Manacher
+1. ~~Manacher~~
 1. 子序列自动机
 1. 平衡树
 1. 拉格朗日插值
 1. 莫比乌斯函数
 1. 欧拉回路
-1. 后缀数组
+1. ~~后缀数组~~
 1. SAM
 1. AC 自动机
 1. 虚树
