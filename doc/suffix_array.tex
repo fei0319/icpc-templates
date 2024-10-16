@@ -1,0 +1,19 @@
+\subsection{后缀数组}
+
+\subsubsection{用法}
+
+各成员含义如下：
+
+\begin{itemize}
+\item \lstinline{sa}：后缀数组
+\item \lstinline{rk}：后缀数组的逆
+\item \lstinline{lc}：第 $i$ 位表示第 $i$ 个后缀和第 $i + 1$ 个后缀的最长公共前缀长度。
+\end{itemize}
+
+\subsubsection{性能}
+
+时间复杂度为 $O(n \log n)$。$n = 5 \times 10^5$ 约花费 1.09 个标准时间。
+
+\subsubsection{代码}
+
+\lstinputlisting{src/smallest_circle.cpp}
