@@ -1,39 +1,29 @@
 template <int SIGMA>
 struct SuffixAutomaton {
-    struct Node {
-        int len{};
-        int link{};
-        int next[SIGMA]{};
-    };
-    std::vector<Node> t;
+    std::vector<int> len, link;
+    std::vector<std::array<int, SIGMA>> next;
     int tot;
-    explicit SuffixAutomaton(int size) : t(size), tot(1) {
-        std::fill(t[0].next, t[0].next + SIGMA, 1);
-        t[0].len = -1;
-    }
-    int extend(int p, int c) {
-        if (t[p].next[c]) {
-            int q = t[p].next[c];
-            if (t[q].len == t[p].len + 1)
-                return q;
-            int r = ++tot;
-            t[r].len = t[p].len + 1;
-            t[r].link = t[q].link;
-            std::copy(t[q].next, t[q].next + SIGMA, t[r].next);
-            t[q].link = r;
-            while (t[p].next[c] == q) {
-                t[p].next[c] = r;
-                p = t[p].link;
-            }
-            return r;
-        }
+    explicit SuffixAutomaton(int size)
+        : len(size), link(size), next(size), tot(1) {}
+    int extend(int p, char c) {
         int cur = ++tot;
-        t[cur].len = t[p].len + 1;
-        while (!t[p].next[c]) {
-            t[p].next[c] = cur;
-            p = t[p].link;
+        len[cur] = len[p] + 1;
+        for (; p && !next[p][c]; p = link[p])
+            next[p][c] = cur;
+        int q = next[p][c];
+        if (!p) {
+            link[cur] = 1;
+        } else if (len[q] == len[p] + 1) {
+            link[cur] = q;
+        } else {
+            int r = ++tot;
+            len[r] = len[p] + 1;
+            link[r] = link[q];
+            next[r] = next[q];
+            link[q] = link[cur] = r;
+            for (; next[p][c] == q; p = link[p])
+                next[p][c] = r;
         }
-        t[cur].link = extend(p, c);
         return cur;
     }
 };
