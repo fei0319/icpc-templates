@@ -1,7 +1,7 @@
-template <int SIGMA>
+template <typename T>
 struct SuffixAutomaton {
     std::vector<int> len, link;
-    std::vector<std::array<int, SIGMA>> next;
+    std::vector<T> next;
     int tot;
     explicit SuffixAutomaton(int size)
         : len(size), link(size), next(size), tot(1) {}

@@ -2,7 +2,7 @@
 
 \subsubsection{用法}
 
-以字符集大小作为模板参数，传入空间大小 $w$ 构造后缀自动机对象。一般取 $w = n * 2 + 1$。
+以转移容器（如 \lstinline{std::array<int, 26>}、\lstinline{std::map<int, int>}）作为模板参数，传入空间大小 $w$ 构造后缀自动机对象。一般取 $w = n * 2 + 1$。
 
 向 \lstinline{extend(p, c)} 传入上次 \lstinline{extend} 的返回值作为 \lstinline{p}（首次传入 1），传入添加的字符归一化后的值作为 \lstinline{c}。
 
