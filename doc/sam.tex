@@ -1,0 +1,13 @@
+\subsection{后缀自动机}
+
+\subsubsection{用法}
+
+以字符集大小作为模板参数，传入空间大小 $w$ 构造后缀自动机对象。需要保证 $w \ge 2 \sum |s|$，一般传入 \lstinline{std::max(n * 2, 5)}。
+
+\subsubsection{性能}
+
+时间复杂度为 $O(n)$，空间复杂度为 $O(n |\Sigma|)$。
+
+\subsubsection{代码}
+
+\lstinputlisting{src/sam.cpp}
