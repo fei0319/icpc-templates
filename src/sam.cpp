@@ -1,5 +1,3 @@
-#include <bits/stdc++.h>
-
 template <int SIGMA>
 struct SuffixAutomaton {
     struct Node {
@@ -39,18 +37,3 @@ struct SuffixAutomaton {
         return cur;
     }
 };
-
-int main() {
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-
-    std::string s;
-    std::cin >> s;
-
-    auto sam = SuffixAutomaton<26>{std::max<int>(s.size() * 2, 10)};
-
-    int last = 0;
-    for (auto c : s) {
-        last = sam.extend(last, c - 'a');
-    }
-}
