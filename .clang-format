@@ -5,3 +5,4 @@ AlwaysBreakTemplateDeclarations: Yes
 AllowShortFunctionsOnASingleLine: Empty
 AllowShortLambdasOnASingleLine: Empty
 NamespaceIndentation: All
+AllowShortIfStatementsOnASingleLine: true
