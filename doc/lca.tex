@@ -1,0 +1,15 @@
+\subsection{线性 LCA}
+
+\subsubsection{用法}
+
+以内置 ST 表倍增量作为模板参数，向构造函数传入树的大小，构造一个 LCA 对象。在通过 \lstinline{add_edge(u, v)} 添加树边后调用 \lstinline{init(rt)} 完成初始化。
+
+\subsubsection{性能}
+
+预处理时间、空间复杂度为 $O(n \log n)$，询问时间复杂度为 $O(1)$。
+
+$n = 5 \times 10^5, q = 10^7$ 时预处理花费 1.37 个标准时间，回答询问花费 3.01 个标准时间。
+
+\subsubsection{代码}
+
+\lstinputlisting{src/lca.cpp}
