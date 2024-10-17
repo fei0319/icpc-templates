@@ -15,7 +15,6 @@ public:
     int operator()() const {
         return raw;
     }
-
     mint &operator+=(const mint &rhs) {
         raw += rhs.raw;
         if (raw >= m) {
@@ -37,7 +36,6 @@ public:
     mint &operator/=(const mint &rhs) {
         return *this *= qpow(rhs, m - 2);
     }
-
     friend mint operator+(const mint &lhs, const mint &rhs) {
         return mint(lhs) += rhs;
     }
@@ -50,11 +48,9 @@ public:
     friend mint operator/(const mint &lhs, const mint &rhs) {
         return mint(lhs) /= rhs;
     }
-
     static constexpr int mod() {
         return m;
     }
-
     static mint qpow(mint a, i64 b) {
         mint res = 1;
         while (b) {
