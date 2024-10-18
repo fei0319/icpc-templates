@@ -1,10 +1,10 @@
-template <typename Mono, int TREE_N>
+template <typename Mono, int N>
 class LinkCutTree {
 #define ls son[x][0]
 #define rs son[x][1]
-    int son[TREE_N][2], fa[TREE_N];
-    Mono dp[TREE_N], val[TREE_N];
-    bool tag[TREE_N];
+    int son[N][2], fa[N];
+    Mono dp[N], val[N];
+    bool tag[N];
     void push_up(int x) {
         dp[x] = dp[ls] * val[x] * dp[rs];
     }
@@ -25,8 +25,7 @@ class LinkCutTree {
     void rotate(int x) {
         int f = fa[x], ff = fa[f], t = get(x);
         fa[x] = ff;
-        if (!isroot(f))
-            son[ff][get(f)] = x;
+        if (!isroot(f)) son[ff][get(f)] = x;
 
         son[f][t] = son[x][t ^ 1], fa[son[x][t ^ 1]] = f;
         push_up(f);
@@ -35,21 +34,18 @@ class LinkCutTree {
         push_up(x);
     }
     void update(int x) {
-        if (!isroot(x))
-            update(fa[x]);
+        if (!isroot(x)) update(fa[x]);
         push_down(x);
     }
     void splay(int x) {
         update(x);
         while (!isroot(x)) {
-            if (!isroot(fa[x]))
-                rotate(get(x) == get(fa[x]) ? fa[x] : x);
+            if (!isroot(fa[x])) rotate(get(x) == get(fa[x]) ? fa[x] : x);
             rotate(x);
         }
     }
     void access(int x) {
-        for (int p = 0; x; p = x, x = fa[x])
-            splay(x), rs = p, push_up(x);
+        for (int p = 0; x; p = x, x = fa[x]) splay(x), rs = p, push_up(x);
     }
     void make_root(int x) {
         access(x), splay(x), tag[x] ^= 1;
@@ -61,9 +57,7 @@ public:
     }
     void cut(int x, int y) {
         make_root(x), access(y), splay(x);
-        if (son[x][1] == y && !son[y][0]) {
-            son[x][1] = fa[y] = 0, push_up(x);
-        }
+        if (son[x][1] == y && !son[y][0]) son[x][1] = fa[y] = 0, push_up(x);
     }
     void set(int x, const Mono &v) {
         val[x] = v;
@@ -75,10 +69,7 @@ public:
     }
     int find(int x) {
         access(x), splay(x);
-        while (son[x][0]) {
-            x = son[x][0];
-            push_down(x);
-        }
+        for (; ls; x = ls, push_down(x));
         splay(x);
         return x;
     }
