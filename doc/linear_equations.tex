@@ -4,40 +4,20 @@
 
 \subsubsection{用法}
 
-向 \lstinline{solve_linear_equations(a, abs, is_zero)} 传入三个参数：
+向 \lstinline{solve_linear_equations(a, abs, zero)} 传入三个参数：
 \begin{itemize}
-\item \lstinline{a}：待解的方程组矩阵，其列数应比行数恰好大 1。
+\item \lstinline{a}：待解的方程组增广矩阵。
 \item \lstinline{abs}：模长函数。
-\item \lstinline{is_zero}：零等函数。
+\item \lstinline{zero}：零等函数。
 \end{itemize}
 
-在 \lstinline{a} 上原地操作，将 \lstinline{a} 的系数部分转化为单位矩阵。如无解，返回 -1，否则返回矩阵的秩。
+在 \lstinline{a} 上原地执行高斯-若尔当消元法，将其化为简化列阶梯形矩阵。
 
-\subsubsection{注意}
-
-下标从 0 开始。
+如无解，返回 -1，否则返回矩阵的秩。
 
 \subsubsection{性能}
 
-\begin{tabular}{|c|c|c|}
-\hline
-\lstinline|T| & $n$ & 用时/标准时间 \\
-\hline
-\lstinline|mint| & $500$ & 0.69 \\
-\hline
-\lstinline|mint| & $1000$ & 4.09 \\
-\hline
-\lstinline|double| & $500$ & 0.23 \\
-\hline
-\lstinline|double| & $1000$ & 2.48 \\
-\hline
-\lstinline|long double| & $500$ & 0.69 \\
-\hline
-\lstinline|long double| & $1000$ & 7.58 \\
-\hline
-\end{tabular}
-
-据信利用 \lstinline{std::bitset} 可以处理多至 $n = 5000$ 的异或线性方程组。
+$n = 500$ 时对 \lstinline{mint} 执行花费时间约为 0.76 个标准时间。
 
 \subsubsection{代码}
 

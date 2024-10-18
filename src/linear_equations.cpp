@@ -3,25 +3,26 @@ int solve_linear_equations(std::vector<std::vector<T>> &a, auto abs,
                            auto zero) {
     const int n = a.size(), m = a[0].size() - 1;
     int rk = 0;
-    for (int now = 0; now < m; ++now) {
+    for (int i = 0; i < m && rk < n; ++i) {
         int p = rk;
         for (int j = p + 1; j < n; ++j)
-            if (abs(a[p][now]) < abs(a[j][now])) p = j;
+            if (abs(a[p][i]) < abs(a[j][i])) p = j;
         std::swap(a[p], a[rk]);
-        if (zero(a[rk][now])) continue;
-        T f = 1 / a[rk][now];
-        for (int i = now; i <= m; ++i)
-            a[rk][i] *= f;
-        for (int i = 0; i < n; ++i) {
-            if (i == rk || zero(a[i][now])) continue;
-            T f = a[i][now];
-            for (int j = now; j <= m; ++j)
-                a[i][j] -= f * a[rk][j];
+        if (zero(a[rk][i])) continue;
+
+        T f = 1 / a[rk][i];
+        for (int k = i; k <= m; ++k)
+            a[rk][k] *= f;
+        for (int j = 0; j < n; ++j) {
+            if (j == rk || zero(a[j][i])) continue;
+            T f = a[j][i];
+            for (int k = i; k <= m; ++k)
+                a[j][k] -= f * a[rk][k];
         }
         ++rk;
     }
-    for (int i = rk; i < n; ++i)
-        if (!zero(a[i][m])) return -1;
+    for (int j = rk; j < n; ++j)
+        if (!zero(a[j][m])) return -1;
 
     return rk;
 };
