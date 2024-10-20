@@ -1,0 +1,15 @@
+\subsection{强连通分量}
+
+计算有向图的强连通分量。
+
+\subsubsection{用法}
+
+传入图的节点数构造对象，通过 \lstinline{add_edge(u, v)} 添加一条有向边。调用函数调用运算符得到一个长度为 $n$ 的 \lstinline{std::vector<int>}，表示各个节点所属强连通分量的编号。强连通分量以逆拓扑序编号。
+
+\subsubsection{性能}
+
+$n, m = 5 \times 10^5$ 时花费 1.91 个标准时间，60.98 Mib 内存。
+
+\subsubsection{代码}
+
+\lstinputlisting{src/scc.cpp}
