@@ -1,0 +1,15 @@
+\subsection{点双连通分量}
+
+计算无向图的点双连通分量。
+
+\subsubsection{用法}
+
+传入图的节点数构造对象，通过 \lstinline{add_edge(u, v)} 添加一条无向边。调用函数调用运算符得到一个包含各个点双连通分量的 \lstinline{std::vector<std::vector<int>>}。
+
+\subsubsection{性能}
+
+$n, m = 5 \times 10^5$ 时花费 1.63 个标准时间，94.56 MiB 内存。
+
+\subsubsection{代码}
+
+\lstinputlisting{src/bcc.cpp}
