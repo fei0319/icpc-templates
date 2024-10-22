@@ -8,25 +8,19 @@ public:
     ModInt() : raw(0) {}
     ModInt(const auto &v) {
         raw = v % m;
-        if (raw < 0) {
-            raw += m;
-        }
+        if (raw < 0) raw += m;
     }
     int operator()() const {
         return raw;
     }
     mint &operator+=(const mint &rhs) {
         raw += rhs.raw;
-        if (raw >= m) {
-            raw -= m;
-        }
+        if (raw >= m) raw -= m;
         return *this;
     }
     mint &operator-=(const mint &rhs) {
         raw -= rhs.raw;
-        if (raw < 0) {
-            raw += m;
-        }
+        if (raw < 0) raw += m;
         return *this;
     }
     mint &operator*=(const mint &rhs) {
@@ -54,9 +48,7 @@ public:
     static mint qpow(mint a, i64 b) {
         mint res = 1;
         while (b) {
-            if (b & 1) {
-                res *= a;
-            }
+            if (b & 1) res *= a;
             a *= a, b >>= 1;
         }
         return res;
