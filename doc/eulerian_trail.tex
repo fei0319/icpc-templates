@@ -1,0 +1,11 @@
+\subsection{欧拉迹}
+
+求有向图或无向图的欧拉迹。
+
+\subsubsection{用法}
+
+传入图的大小构造欧拉迹对象，通过 \lstinline{add_edge(u, v, directed)} 添加一条有向边/无向边。向函数调用运算符传入起点，返回一个由路径上点和路径上边构成的 \lstinline{std::pair<std::vector<int>, std::vector<int>>}。
+
+\subsubsection{代码}
+
+\lstinputlisting{src/eulerian_trail.cpp}
