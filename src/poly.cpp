@@ -12,7 +12,7 @@ class Poly : public std::vector<Z> {
             int k = __builtin_ctz(w.size());
             w.resize(n);
             while ((1 << k) < n) {
-                auto e = Z::qpow(G, 1 << (__builtin_ctz(Z::mod() - 1) - k - 1));
+                Z e = Z::qpow(G, 1 << (__builtin_ctz(Z::mod() - 1) - k - 1));
                 for (int i = 1 << (k - 1); i < (1 << k); ++i)
                     w[i * 2] = w[i], w[i * 2 + 1] = w[i] * e;
                 ++k;
@@ -90,6 +90,7 @@ public:
         return Poly(lhs) *= rhs;
     }
 
+    // Newton
     Poly prefix(int len) const {
         Poly f(*this);
         f.resize(len);
