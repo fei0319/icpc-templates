@@ -2,7 +2,7 @@ struct BipartiteColoring {
     std::vector<std::pair<int, int>> edge;
     std::vector<std::vector<int>> adj;
     std::vector<int> color;
-    BipartiteColoring(int n) : adj(n) {}
+    explicit BipartiteColoring(int n) : adj(n) {}
     int add_edge(int u, int v) {
         edge.emplace_back(u, v);
         return edge.size() - 1;
