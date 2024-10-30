@@ -13,7 +13,22 @@
 \item $1004535809 = 479 \times 2^{21} + 1$
 \end{itemize}
 
-该实现需要特别的原根，可以通过 \lstinline{primitive_root.cpp} 计算。对于 $998244353$ 可使用 $31$，对于 $1004535809$ 可使用 $702606812$。使用时，用适合的原根替换第 17 行的 \lstinline{31}。
+该实现需要特别的原根，可以通过 \lstinline{primitive_root.cpp} 计算。对于 $998244353$ 可使用 $31$，对于 $1004535809$ 可使用 $702606812$。
+
+\begin{lstlisting}
+template <class Z>
+Z primitive_root() {
+    Z i = 2;
+    int k = __builtin_ctz(Z::mod() - 1);
+    while (true) {
+        if (Z::qpow(i, (Z::mod() - 1) / 2).value() != 1) {
+            break;
+        }
+        i += 1;
+    }
+    return Z::qpow(i, (Z::mod() - 1) >> k);
+}
+\end{lstlisting}
 
 \lstinline{Poly} 继承了 \lstinline{std::vector}，因此支持一切 \lstinline{std::vector} 的功能。可能需要在 \lstinline{Poly} 的 public 区添加 \lstinline{using std::vector<Z>::method} 来导入相应方法。
 
