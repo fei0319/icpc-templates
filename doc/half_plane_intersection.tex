@@ -4,17 +4,7 @@
 
 \subsubsection{用法}
 
-通过 \lstinline{HalfPlaneIntersection<T>} 实例化半平面交类。通过函数调用运算符向实例传入包含一系列半平面的 \lstinline{std::vector<Line>}，返回按逆时针给出的半平面交顶点集。
-
-半平面的声明如下：
-
-\begin{lstlisting}
-struct Line {
-    T a, b, c;
-};
-\end{lstlisting}
-
-其表示一个方程为 $Ax + By + C \ge 0$ 的半平面。
+半平面以 $Ax + By + C \ge 0$ 的形式表示。
 
 \subsubsection{注意}
 
