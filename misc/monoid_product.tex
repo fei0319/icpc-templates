@@ -1,0 +1,19 @@
+\subsection{幺半群区间积}
+
+对于一个幺半群/半群构成的长度为 $n$ 的序列，离线计算 $q$ 个区间的积。该方法的优势在于效率，设单次乘法的复杂度为 $O(k)$，则该方法的复杂度为 $O(nk\log n + q)$ 且常数较小。
+
+\subsubsection{用法}
+
+需要一个幺半群/半群类 \lstinline{Mono}。在 \lstinline{monoid_product(vec, query, f)} 中，\lstinline{vec} 是一个 \lstinline{Mono} 的序列，\lstinline{query} 是一个区间的序列，\lstinline{f} 是一个对于每个长度大于等于 2 的询问区间调用的函数，对于每个询问区间 $q_i = [l, r]$，\lstinline{f} 均会以 \lstinline{f(L, R, i)} 的形式被调用，其中 \lstinline{L * R} 为 $q_i$ 的区间积。
+
+\subsubsection{注意}
+
+长度为 1 的询问区间会被忽略。下标从 0 开始。
+
+\subsubsection{性能}
+
+乘法大约仅会进行 $\dfrac{n \log n}{2}$ 次。
+
+\subsubsection{代码}
+
+\lstinputlisting{misc/monoid_product.hpp}
