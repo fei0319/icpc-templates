@@ -7,5 +7,6 @@
 *.gz
 *.swp
 test*.cpp
+*_expanded.cpp
 *.exe
 *.out
