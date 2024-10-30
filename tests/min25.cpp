@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
 
+// https://judge.yosupo.jp/problem/sum_of_multiplicative_function
+
 #include "../combinatorics/modint.hpp"
 
 using mint = ModInt<469762049>;
