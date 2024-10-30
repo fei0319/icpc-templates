@@ -19,7 +19,7 @@
 \lstdefinestyle{cppstyle}{
     language=C++,
     backgroundcolor=\color{white},
-    commentstyle=\color{green},
+    commentstyle=\color{teal},
     keywordstyle=\color{magenta},
     stringstyle=\color{red},
     basicstyle=\ttfamily\small,
@@ -135,6 +135,25 @@ $10^{18}$ & $15$ & $103680$ \\
 \include{doc/hash_map}
 
 \section{计算几何}
+
+本模块的项目通常需要一个点类作为模板参数，其应当符合以下格式：
+
+\begin{lstlisting}
+template <typename T>
+struct Point {
+    T x{}, y{};
+    friend T operator*(const Point &lhs, const Point &rhs) {
+        return lhs.x * rhs.y - lhs.y * rhs.x;
+    }
+    friend Point operator-(const Point &lhs, const Point &rhs) {
+        return Point{lhs.x - rhs.y, lhs.y - rhs.y};
+    }
+    // More operators to go...
+};
+\end{lstlisting}
+
+本模块的项目除非注明，否则不保证在输入为整数的情况下能够无误差计算结果。
+
 \include{doc/convex_hull}
 \include{doc/smallest_circle}
 \include{doc/half_plane_intersection}
