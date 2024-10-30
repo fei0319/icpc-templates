@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+    echo "Usage: xpand <filename>"
+    exit 1
+fi
+
+filename="$1.cpp"
+basename="$1"
+
+if [ ! -f "$filename" ]; then
+    echo "File $filename does not exist."
+    exit 1
+fi
+
+first_line=$(head -n 1 "$filename")
+
+temp_file="${basename}_temp.cpp"
+tail -n +2 "$filename" > "$temp_file"
+
+g++ -E "$temp_file" -o "${basename}_expanded.cpp"
+
+{
+    echo "$first_line"
+    cat "${basename}_expanded.cpp"
+} > temp_output && mv temp_output "${basename}_expanded.cpp"
+
+rm "$temp_file"
+
+echo "Expanded output written to ${basename}_expanded.cpp"
