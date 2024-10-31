@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
 
+// https://www.luogu.com.cn/problem/P4250
+
 template <typename T>
 struct Point {
     T x{}, y{};
