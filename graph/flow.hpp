@@ -1,6 +1,5 @@
 template <typename T>
 struct Flow {
-    static constexpr int INF = 1e9;
     int n;
     struct Edge {
         int to;
@@ -55,7 +54,7 @@ struct Flow {
         edge.emplace_back(u, 0);
         return j;
     }
-    T operator()(int s, int t) {
+    T operator()(int s, int t, const T INF = 1e9) {
         T ans = 0;
         while (bfs(s, t)) cur.assign(n, 0), ans += dfs(s, t, INF);
         return ans;
