@@ -1,4 +1,4 @@
-template <class T>
+template <typename T>
 struct Flow {
     static constexpr int INF = 1e9;
     int n;
