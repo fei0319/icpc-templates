@@ -27,9 +27,8 @@ int main() {
         i = x;
     }
 
-    auto q = f / g, r = f % g;
-    // To test % operator, r is not calculated by f - q * g
-    while (!r.empty() && r.back()() == 0) r.pop_back();
+    auto q = f / g, r = f - q * g;
+    r.rtz();
 
     std::cout << q.size() << ' ' << r.size() << '\n';
     for (auto i : q) std::cout << i() << ' ';
