@@ -42,7 +42,8 @@ public:
 
     // Convolution
     Poly &operator*=(const Poly &rhs) {
-        int N = 2, n = size() + rhs.size() - 1;
+        if (!std::min(size(), rhs.size())) return resize(0), *this;
+        int N = 1, n = size() + rhs.size() - 1;
         while (N < n) N *= 2;
         Poly &f(*this), g(N);
         f.resize(N), std::copy(rhs.begin(), rhs.end(), g.begin());
@@ -111,7 +112,7 @@ public:
         return f;
     }
     friend Poly exp(const Poly &h) {
-        int N = 2;
+        int N = 1;
         while (N < (int)(h.size() + h.size() - 1)) N *= 2;
         Poly f(N), g(N), d(h);
         f[0] = 1, d.resize(N);
@@ -148,19 +149,18 @@ public:
     std::vector<Z> operator()(std::vector<Z> &p) {
         int N = 1;
         while (N < p.size()) N *= 2;
-        std::vector<Poly> product_tree(N * 2, Poly{Z{1}});
-        for (int i = 0; i < p.size(); i++)
-            product_tree[N + i] = Poly{0 - p[i], Z{1}};
+        std::vector<Poly> prod(N * 2, Poly{Z{1}});
+        for (int i = 0; i < p.size(); i++) prod[N + i] = Poly{0 - p[i], Z{1}};
         for (int i = N - 1; i >= 1; --i)
-            product_tree[i] = product_tree[i * 2] * product_tree[i * 2 + 1];
-        std::vector<Poly> reminder_tree(N * 2, Poly{Z{0}});
-        reminder_tree[1] = *this % product_tree[1];
+            prod[i] = prod[i * 2] * prod[i * 2 + 1];
+        std::vector<Poly> remd(N * 2, Poly{Z{0}});
+        remd[1] = *this % prod[1];
         for (int i = 2; i < N * 2; i++) {
-            reminder_tree[i] = reminder_tree[i / 2] % product_tree[i];
-            reminder_tree[i].rtz();
+            remd[i] = remd[i / 2] % prod[i];
+            remd[i].rtz();
         }
         std::vector<Z> res(p.size());
-        for (int i = 0; i < p.size(); i++) res[i] = reminder_tree[N + i][0];
+        for (int i = 0; i < p.size(); i++) res[i] = remd[N + i][0];
         return res;
     }
 };
