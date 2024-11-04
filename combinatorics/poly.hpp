@@ -42,7 +42,6 @@ public:
 
     // Convolution
     Poly &operator*=(const Poly &rhs) {
-        if (!std::min(size(), rhs.size())) return resize(0), *this;
         int N = 1, n = size() + rhs.size() - 1;
         while (N < n) N *= 2;
         Poly &f(*this), g(N);
@@ -143,6 +142,7 @@ public:
         while (!this->empty() && this->back()() == 0) this->pop_back();
     }
     friend Poly operator%(const Poly &lhs, const Poly &rhs) {
+        if (lhs.size() < rhs.size()) return lhs;
         return lhs - lhs / rhs * rhs;
     }
 
