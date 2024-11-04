@@ -123,6 +123,28 @@ public:
         f.resize(h.size());
         return f;
     }
+
+    // Multipoint evaluation
+    Poly &operator/=(const Poly &rhs) {
+        if (size() < rhs.size()) return resize(0), *this;
+        int n = size() - rhs.size() + 1;
+        Poly gr(rhs.rbegin(), rhs.rend());
+        std::reverse(this->begin(), this->end());
+        gr.resize(n), resize(n);
+        *this *= gr.inv(), resize(n);
+        std::reverse(this->begin(), this->end());
+        return *this;
+    }
+    Poly &operator%=(const Poly &rhs) {
+        if (size() < rhs.size()) return *this;
+        return *this -= *this / rhs * rhs;
+    }
+    friend Poly operator/(const Poly &lhs, const auto &rhs) {
+        return Poly(lhs) /= rhs;
+    }
+    friend Poly operator%(const Poly &lhs, const auto &rhs) {
+        return Poly(lhs) %= rhs;
+    }
 };
 
 template <class Z, int G>
