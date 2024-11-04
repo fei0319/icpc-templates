@@ -2,8 +2,8 @@ BasedOnStyle: LLVM
 IndentWidth: 4
 AccessModifierOffset: -4
 AlwaysBreakTemplateDeclarations: Yes
-AllowShortFunctionsOnASingleLine: Empty
-AllowShortLambdasOnASingleLine: Empty
+AllowShortFunctionsOnASingleLine: All
+AllowShortLambdasOnASingleLine: All
 NamespaceIndentation: All
-AllowShortIfStatementsOnASingleLine: true
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
 AllowShortLoopsOnASingleLine: true
