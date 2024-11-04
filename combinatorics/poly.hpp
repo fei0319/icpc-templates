@@ -39,7 +39,6 @@ public:
     using std::vector<Z>::vector;
     using std::vector<Z>::size;
     using std::vector<Z>::resize;
-    using std::vector<Z>::empty;
 
     // Convolution
     Poly &operator*=(const Poly &rhs) {
@@ -97,7 +96,7 @@ public:
         return f;
     }
     Poly inv() const {
-        Poly f{Z(1) / this->operator[](0)};
+        Poly f{Z{1} / this->operator[](0)};
         for (int i = 1; i < size(); i *= 2)
             f = (f * 2 - f * f * prefix(i * 2)).prefix(i * 2);
         f.resize(size());
@@ -107,8 +106,7 @@ public:
         Poly f(h);
         for (int i = 1; i < (int)f.size(); ++i) f[i - 1] = f[i] * i;
         f[f.size() - 1] = 0, f *= h.inv(), f.resize(h.size());
-        for (int i = (int)f.size() - 1; i > 0; --i)
-            f[i] = f[i - 1] * Z::qpow(i, Z::mod() - 2);
+        for (int i = (int)f.size() - 1; i > 0; --i) f[i] = f[i - 1] / i;
         f[0] = 0;
         return f;
     }
@@ -119,7 +117,7 @@ public:
         f[0] = 1, d.resize(N);
         for (int w = 2; w < N; w <<= 1) {
             f.resize(w), g.resize(w);
-            for (int i = 0; i < w; ++i) g[i] = d[i];
+            std::copy(d.begin(), d.begin() + w, g.begin());
             f *= (g + 1 - log(f)), f.resize(w);
         }
         f.resize(h.size());
