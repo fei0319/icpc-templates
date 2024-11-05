@@ -10,6 +10,7 @@ using i64 = int64_t;
 struct IntAdd {
     i64 x;
     IntAdd operator*(const IntAdd &rhs) { return IntAdd{x + rhs.x}; }
+    void flip() {}
 };
 
 LinkCutTree<IntAdd, static_cast<int>(2e5 + 1)> t;
