@@ -13,6 +13,7 @@
 \usepackage{geometry}
 \usepackage{setspace}
 \usepackage{fontspec}
+\usepackage{multicol}
 
 % \setmonofont{Consolas}
 
@@ -57,65 +58,7 @@
 \tableofcontents
 \newpage
 
-\section{说明}
-
-定义执行一次以下代码花费的时间为一个标准时间。其在各个 OJ 上的具体值为：
-
-\begin{itemize}
-\item Codeforces: 202ms
-\item AtCoder: 221ms
-\item LibraryChecker: 176ms
-\item Luogu: 242ms
-\end{itemize}
-\begin{lstlisting}
-constexpr int N = 1e6;
-std::set<int> s;
-for (int i = 0; i < N; ++i) s.insert(i);
-\end{lstlisting}
-
-\begin{tabular}{|c|c|c|}
-\hline
-$n \le$ & $\max\{\omega(n)\}$ & $\max\{d(n)\}$ \\
-\hline
-$10^{1}$ & $2$ & $4$ \\
-\hline
-$10^{2}$ & $3$ & $12$ \\
-\hline
-$10^{3}$ & $4$ & $32$ \\
-\hline
-$10^{4}$ & $5$ & $64$ \\
-\hline
-$10^{5}$ & $6$ & $128$ \\
-\hline
-$10^{6}$ & $7$ & $240$ \\
-\hline
-$10^{7}$ & $8$ & $448$ \\
-\hline
-$10^{8}$ & $8$ & $768$ \\
-\hline
-$10^{9}$ & $9$ & $1344$ \\
-\hline
-$10^{10}$ & $10$ & $2304$ \\
-\hline
-$10^{11}$ & $10$ & $4032$ \\
-\hline
-$10^{12}$ & $11$ & $6720$ \\
-\hline
-$10^{13}$ & $12$ & $10752$ \\
-\hline
-$10^{14}$ & $12$ & $17280$ \\
-\hline
-$10^{15}$ & $13$ & $26880$ \\
-\hline
-$10^{16}$ & $13$ & $41472$ \\
-\hline
-$10^{17}$ & $14$ & $64512$ \\
-\hline
-$10^{18}$ & $15$ & $103680$ \\
-\hline
-\end{tabular}
-
-\newpage
+\include{prologue/index}
 
 \section{计数}
 \include{combinatorics/modint}
