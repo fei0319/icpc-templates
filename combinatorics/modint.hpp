@@ -10,9 +10,7 @@ public:
         raw = v % m;
         if (raw < 0) raw += m;
     }
-    int operator()() const {
-        return raw;
-    }
+    int operator()() const { return raw; }
     mint &operator+=(const mint &rhs) {
         raw += rhs.raw;
         if (raw >= m) raw -= m;
@@ -27,24 +25,19 @@ public:
         raw = (i64)raw * rhs.raw % m;
         return *this;
     }
-    mint &operator/=(const mint &rhs) {
-        return *this *= qpow(rhs, m - 2);
+    mint &operator/=(const mint &rhs) { return *this *= qpow(rhs, m - 2); }
+
+#define DOP(op)                                                           \
+    friend mint operator op(const mint &lhs, const mint &rhs) {           \
+        return mint{lhs} op## = rhs;                                      \
     }
-    friend mint operator+(const mint &lhs, const mint &rhs) {
-        return mint(lhs) += rhs;
-    }
-    friend mint operator-(const mint &lhs, const mint &rhs) {
-        return mint(lhs) -= rhs;
-    }
-    friend mint operator*(const mint &lhs, const mint &rhs) {
-        return mint(lhs) *= rhs;
-    }
-    friend mint operator/(const mint &lhs, const mint &rhs) {
-        return mint(lhs) /= rhs;
-    }
-    static constexpr int mod() {
-        return m;
-    }
+    DOP(+)
+    DOP(-)
+    DOP(*)
+    DOP(/)
+#undef DOP
+
+    static constexpr int mod() { return m; }
     static mint qpow(mint a, i64 b) {
         mint res = 1;
         while (b) {
