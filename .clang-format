@@ -7,3 +7,4 @@ AllowShortLambdasOnASingleLine: All
 NamespaceIndentation: All
 AllowShortIfStatementsOnASingleLine: AllIfsAndElse
 AllowShortLoopsOnASingleLine: true
+ColumnLimit: 75
