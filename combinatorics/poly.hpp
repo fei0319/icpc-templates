@@ -138,15 +138,14 @@ public:
     friend Poly operator/(const Poly &lhs, const Poly &rhs) {
         return Poly(lhs) /= rhs;
     }
-    void rtz() {
-        while (!this->empty() && this->back()() == 0) this->pop_back();
-    }
     friend Poly operator%(const Poly &lhs, const Poly &rhs) {
         if (lhs.size() < rhs.size()) return lhs;
         return lhs - lhs / rhs * rhs;
     }
-
-    std::vector<Z> operator()(std::vector<Z> &p) {
+    void rtz() { // remove trailing zeros
+        while (!this->empty() && this->back()() == 0) this->pop_back();
+    }
+    std::vector<Z> operator()(const std::vector<Z> &p) const {
         int N = 1;
         while (N < p.size()) N *= 2;
         std::vector<Poly> prod(N * 2, Poly{Z{1}});
@@ -162,6 +161,24 @@ public:
         std::vector<Z> res(p.size());
         for (int i = 0; i < p.size(); i++) res[i] = remd[N + i][0];
         return res;
+    }
+    static Poly interpolation(const std::vector<Z> &x,
+                              const std::vector<Z> &y) {
+        int N = 1;
+        while (N < x.size()) N *= 2;
+        std::vector<Poly> prod(N * 2, Poly{Z(1)});
+        for (int i = 0; i < x.size(); i++) prod[N + i] = Poly{0 - x[i], Z{1}};
+        for (int i = N - 1; i >= 1; i--)
+            prod[i] = prod[i * 2] * prod[i * 2 + 1];
+        Poly g_d = prod[1];
+        for (int i = 1; i < g_d.size(); ++i) g_d[i - 1] = g_d[i] * i;
+        g_d.pop_back();
+        std::vector<Z> p = g_d(x);
+        std::vector<Poly> f(N * 2, Poly{Z(0)});
+        for (int i = 0; i < x.size(); i++) f[N + i] = Poly{y[i] / p[i]};
+        for (int i = N - 1; i >= 1; i--)
+            f[i] = (f[i * 2] * prod[i * 2 + 1]) + (f[i * 2 + 1] * prod[i * 2]);
+        return f[1].prefix(N);
     }
 };
 
