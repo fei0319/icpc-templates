@@ -22,12 +22,9 @@ class LinkCutTree {
     bool isroot(int x) { return son[fa[x]][0] != x && son[fa[x]][1] != x; }
     void rotate(int x) {
         int f = fa[x], ff = fa[f], t = get(x);
-        fa[x] = ff;
         if (!isroot(f)) son[ff][get(f)] = x;
-        son[f][t] = son[x][t ^ 1], fa[son[x][t ^ 1]] = f;
-        push_up(f);
-        son[x][t ^ 1] = f, fa[f] = x;
-        push_up(x);
+        son[f][t] = son[x][t ^ 1], fa[son[x][t ^ 1]] = f, push_up(f);
+        son[x][t ^ 1] = f, fa[f] = x, fa[x] = ff, push_up(x);
     }
     void update(int x) {
         if (!isroot(x)) update(fa[x]);
