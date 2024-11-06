@@ -2,22 +2,12 @@
 
 \subsubsection{用法}
 
-通过 \lstinline{LinkCutTree<Mono, N>} 实例化动态树类。
-
 \begin{itemize}
 \item \lstinline{Mono}：一个幺半群或半群类。需重载 \lstinline{*} 运算符。
 \item \lstinline{N}：一个整数，值应\textbf{大于}需要使用的最大下标。
 \end{itemize}
 
-以下公共方法均允许不实现。
-
-\begin{itemize}
-\item \lstinline{link}：添加一条边。
-\item \lstinline{cut}：切割一条边。
-\item \lstinline{set}：设置一个节点的值。
-\item \lstinline{query}：查询两点间路径上所有节点元素按顺序相乘的结果。
-\item \lstinline{find}：查询一个节点所在树的根，可用于判断连通性。
-\end{itemize}
+该实现包含的 Splay 可单独抽出作为平衡树使用。
 
 \subsubsection{注意}
 
@@ -25,7 +15,7 @@
 
 \subsubsection{性能}
 
-$n, q = 2\times 10^5$ 约花费 1.49 个标准时间。
+$n, q = 2\times 10^5$ 约花费 1.28 个标准时间。
 
 \subsubsection{代码}
 

@@ -12,10 +12,10 @@ class LinkCutTree {
     }
     void push_down(int x) {
         if (tag[x]) {
-            std::swap(ls, rs);
-            tag[ls] ^= 1, tag[rs] ^= 1;
-            dp[ls].flip(), dp[rs].flip();
             tag[x] = 0;
+            std::swap(ls, rs);
+            tag[ls] ^= 1, dp[ls].flip();
+            tag[rs] ^= 1, dp[rs].flip();
         }
     }
     int get(int x) { return son[fa[x]][1] == x; }
@@ -35,24 +35,23 @@ class LinkCutTree {
         for (; !isroot(x); rotate(x))
             if (!isroot(fa[x])) rotate(get(x) == get(fa[x]) ? fa[x] : x);
     }
-    void access(int x) {
-        for (int p = 0; x; p = x, x = fa[x]) splay(x), rs = p, push_up(x);
+    int access(int x) {
+        int p = 0;
+        for (; x; p = x, x = fa[x]) splay(x), rs = p, push_up(x);
+        return p;
     }
-    void make_root(int x) { access(x), splay(x), tag[x] ^= 1, dp[x].flip(); }
+    int make_root(int x) { return x = access(x), tag[x] ^= 1, dp[x].flip(), x; }
 
 public:
-    void link(int x, int y) { make_root(x), fa[x] = y; }
+    void link(int x, int y) { fa[make_root(x)] = y; }
     void cut(int x, int y) {
         make_root(x), access(y), splay(x);
         if (son[x][1] == y && !son[y][0]) son[x][1] = fa[y] = 0, push_up(x);
     }
-    void set(int x, const Mono &v) { make_root(x), val[x] = v, push_up(x); }
-    Mono query(int u, int v) {
-        make_root(u), access(v), splay(v);
-        return dp[v];
-    }
+    void set(int x, const Mono &v) { splay(x), val[x] = v, push_up(x); }
+    Mono query(int u, int v) { return make_root(u), dp[access(v)]; }
     int find(int x) {
-        access(x), splay(x);
+        x = access(x);
         for (; ls; x = ls, push_down(x));
         splay(x);
         return x;
