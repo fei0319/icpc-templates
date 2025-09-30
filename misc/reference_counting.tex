@@ -1,0 +1,19 @@
+\subsection{引用计数}
+
+基于引用计数的动态内存管理。
+
+\subsubsection{用法}
+
+模板 \lstinline{Rc<T, S, A>} 参数含义：
+
+\begin{itemize}
+    \item \lstinline{T}：数据类型
+    \item \lstinline{S}：可分配对象数
+    \item \lstinline{A}：为单个对象提供的存储空间（字节）
+\end{itemize}
+
+默认构造将生成一个空指针；通过 \lstinline{Rc<T, S, A>::make(args...)} 获取一个初始化好的对象指针。特别的，空指针指向一个零初始化的对象。
+
+\subsubsection{代码}
+
+\lstinputlisting{misc/reference_counting.hpp}
